@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.1.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Submitted Info</h1>
+    </header>
+    <main>
+      <div class="results-wrapper">
+        <div class="result-row">
+          <span class="result-label">Name: </span><span class="result-data">{{ name }}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Location: </span><span class="result-data">{{ location }}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Favorite Language: </span><span class="result-data">{{ fav_lang }}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Comments: </span><span class="result-data">{{ comments }}</span>
+        </div>
+
+      </div>
+    </main>
+  </body>
+</html>

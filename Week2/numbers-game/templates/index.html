@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Numbers Game</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.1.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to the Numbers Game</h1>
+      <h3>I'm thinking of a number between 1-100.</h3>
+    </header>
+    <main>
+      <div class="guess-box">
+
+        {% if session.guess == 0 %}
+          <h3>Take a guess!</h3>
+
+        {% elif session.guess == session.random %}
+          <h2>You got it!</h2>
+          <h1>Winner!</h1>
+        {% elif session.guess < session.random %}
+          <h3>Too Low...</h3>
+          <h4>Try Again</h4>
+
+        {% elif session.guess > session.random %}
+          <h3>Too High...</h3>
+          <h4>Try Again</h4>
+        {% else %}
+
+        {% endif %}
+
+      </div>
+
+      <form action="/post" method="post">
+        <input type="hidden" name="action" value="guess">
+        <input type="number" name="guess" min="1" max="100">
+        <button type="submit" name="submit" value="">Submit</button>
+      </form>
+
+      <form action="/post" method="post">
+        <input type="hidden" name="action" value="reset">
+        <button type="submit" name="submit" value="">Reset</button>
+      </form>
+
+    </main>
+  </body>
+</html>

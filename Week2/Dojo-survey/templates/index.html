@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dojo Survey</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.1.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1>Dojo-Survey</h1>
+    </header>
+    <main>
+      <form class="dojo-form" action="/result" method="post">
+        <label>Your Name<input class="form-control" id="first-name"  type="text" name="name" value=""></label>
+        <div class="form-group">
+          <label for="location">Dojo Location</label>
+          <select class="form-control" name="location">
+            <option value="Seattle">Seattle</option>
+            <option value="San-Francisco">San-Francisco</option>
+            <option value="San-Jose">San-Jose</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Washington-DC">Washington-DC</option>
+            <option value="Dallas">Dallas</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="fav-lang">Favorite Language</label>
+          <select class="form-control" name="fav-lang">
+            <option value="Javascript">Javascript</option>
+            <option value="Css3">Css3</option>
+            <option value="Html5">Html5</option>
+            <option value="Python">Python</option>
+            <option value="Ruby">Ruby</option>
+            <option value="Node-Js">Node-Js</option>
+          </select>
+        </div>
+
+        <label for="comments">Comments (optional)</label>
+        <textarea class="form-control" name="comments" rows="8" cols="40"></textarea>
+        <input class="form-button" type="submit" name="submit" value="Submit Form">
+      </form>
+    </main>
+  </body>
+</html>

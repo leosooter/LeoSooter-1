@@ -1,0 +1,35 @@
+body{
+  padding: 20px;
+}
+h1{
+  color: rgb(2, 106, 116) !important;
+}
+form{
+  max-width: 600px;
+  .form-button{
+    margin-top: 20px;
+  }
+}
+.results-wrapper{
+  font-size: 18px;
+  max-width: 600px;
+  padding: 10px;
+  div:last-child{
+    span:last-of-type{
+      border-bottom: none !important;
+    }
+  }
+  .result-row{
+    width: 80%;
+    margin-top: 20px;
+    .result-label{
+      border-bottom: 1px solid rgb(215, 215, 215);
+    }
+    .result-data{
+      float: right;
+      width: 200px;
+      color: rgb(2, 106, 116);
+      border-bottom: 1px solid rgb(215, 215, 215);
+    }
+  }
+}
