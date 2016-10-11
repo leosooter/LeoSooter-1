@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Registration Form</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.1.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1>Registration Form</h1>
+    </header>
+    <main>
+      <!-- check to see if form is valid- if so, display success message -->
+      {% with valid = get_flashed_messages(category_filter=["valid"]) %}
+        {% if valid %}
+          <h4>Your form has been successfully submitted</h4>
+          <p>Thank you for signing up for our indentured servitude program!</p>
+          
+        <!-- Otherwise, display the form -->
+        {% else %}
+          <form action="/result" method="post">
+            <!-- check for error messages and display -->
+            {% with email = get_flashed_messages(category_filter=["email"]) %}
+              {% if email %}
+                {% for message in email %}
+                  <p class="required-red">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <!-- if form was submitted with errors, fill values back in -->
+            {% with email_value = get_flashed_messages(category_filter=["email_value"]) %}
+              {% if email_value %}
+                {% for val in email_value %}
+                  <label>Email<span class="required-red">*</span><input class="form-control required" id="email"  type="email" name="email" autofocus="true" value={{ val }}></label>
+                {% endfor %}
+              <!-- if form is being displayed for the first time, leave values empty -->
+              {% else %}
+                <label>Email<span class="required-red">*</span><input class="form-control required" id="email"  type="email" name="email" autofocus="true" value=""></label>
+              {% endif %}
+            {% endwith %}
+
+            <!-- check for error messages and display -->
+            {% with first_name = get_flashed_messages(category_filter=["first_name"]) %}
+              {% if first_name %}
+                {% for message in first_name %}
+                  <p class="required-red">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <!-- if form was submitted with errors, fill values back in -->
+            {% with fname_value = get_flashed_messages(category_filter=["fname_value"]) %}
+              {% if fname_value %}
+                {% for val in fname_value %}
+                  <label>First Name<span class="required-red">*</span><input class="form-control required" id="first-name"  type="text" name="first-name" value={{ val }}></label>
+                {% endfor %}
+              <!-- if form is being displayed for the first time, leave values empty -->
+              {% else %}
+                <label>First Name<span class="required-red">*</span><input class="form-control required" id="first-name"  type="text" name="first-name" value=""></label>
+              {% endif %}
+            {% endwith %}
+
+            <!-- check for error messages and display -->
+            {% with last_name = get_flashed_messages(category_filter=["last_name"]) %}
+              {% if last_name %}
+                {% for message in last_name %}
+                  <p class="required-red">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <!-- if form was submitted with errors, fill values back in -->
+            {% with lname_value = get_flashed_messages(category_filter=["lname_value"]) %}
+              {% if lname_value %}
+                {% for val in lname_value %}
+                  <label>Last Name<span class="required-red">*</span><input class="form-control required" id="last-name"  type="text" name="last-name" value={{ val }}></label>
+                {% endfor %}
+              <!-- if form is being displayed for the first time, leave values empty -->
+              {% else %}
+                <label>Last Name<span class="required-red">*</span><input class="form-control required" id="last-name"  type="text" name="last-name" value=""></label>
+              {% endif %}
+            {% endwith %}
+
+            <!-- check for error messages and display -->
+            {% with date_of_birth = get_flashed_messages(category_filter=["date_of_birth"]) %}
+              {% if date_of_birth %}
+                {% for message in date_of_birth %}
+                  <p class="required-red">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <!-- if form was submitted with errors, fill values back in -->
+            {% with dob_value = get_flashed_messages(category_filter=["dob_value"]) %}
+              {% if dob_value %}
+                {% for val in dob_value %}
+                  <label>Date of Birth<span class="required-red">*</span><input class="form-control required" id="date-of-birth"  type="date" name="date-of-birth" value={{ val }}></label>
+                {% endfor %}
+              <!-- if form is being displayed for the first time, leave values empty -->
+              {% else %}
+                <label>Date of Birth<span class="required-red">*</span><input class="form-control required" id="date-of-birth"  type="date" name="date-of-birth" value=""></label>
+              {% endif %}
+            {% endwith %}
+
+            <!-- check for error messages and display -->
+            {% with password = get_flashed_messages(category_filter=["password"]) %}
+              {% if password %}
+                {% for message in password %}
+                  <p class="required-red">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <label>Password<span class="required-red">*</span><input class="form-control required" id="password"  type="password" name="password" value=""></label>
+
+            <!-- check for error messages and display -->
+            {% with confirm_password = get_flashed_messages(category_filter=["confirm_password"]) %}
+              {% if confirm_password %}
+                {% for message in confirm_password %}
+                  <p class="required-red">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <label>Confirm Password<span class="required-red">*</span><input class="form-control required" id="confirm-password"  type="password" name="confirm-password" value=""></label>
+
+            <input class="form-button" type="submit" name="submit" value="Submit Form" disabled="disabled">
+          </form>
+          <label for="over-ride">Over-ride javascript form validation (for testing server-side validation)</label>
+          <button id="over-ride" type="button" name="over-ride">Over-Ride</button>
+
+        {% endif %}
+      {% endwith %}
+    </main>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ninja Gold</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.1.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
+
+  </head>
+  <body>
+    {% if session.gold < 0 %}
+      <div class="game-over-background"></div>
+      <div class="game-over">
+        <h2>You ran out of gold!</h2>
+        <form class="reset" action="/process_money" method="post">
+          <input type="hidden" name="place" value="reset">
+          <input type="submit" name="submit" value="Reset">
+        </form>
+      </div>
+    {% endif %}
+    <header>
+      <h1>Ninja <span>Gold</span></h1>
+    </header>
+    <main>
+      <div class="gold-bar">
+        <span>Your Gold:</span><span id='gold-box'>{{ session.gold }}</span>
+      </div>
+      <form id="farm" action="/process_money" method="post">
+        <h2>Farm</h2>
+        <p>(earns 10-20 gold)</p>
+        <input type="hidden" name="place" value="farm">
+        <input type="submit" name="submit" value="Find Gold">
+      </form>
+      <form id="cave" action="/process_money" method="post">
+        <h2>Cave</h2>
+        <p>(earns 5-10 gold)</p>
+        <input type="hidden" name="place" value="cave">
+        <input type="submit" name="submit" value="Find Gold">
+      </form>
+      <form id="house" action="/process_money" method="post">
+        <h2>House</h2>
+        <p>(earns 2-5 gold)</p>
+        <input type="hidden" name="place" value="house">
+        <input type="submit" name="submit" value="Find Gold">
+      </form>
+      <form id="casino" action="/process_money" method="post">
+        <h2>Gambling House*</h2>
+        <p>(earns/takes 0-50 gold)</p>
+        <p><em>*Casinos are illegal in Japan</em></p>
+        <input type="hidden" name="place" value="casino">
+        <input type="submit" name="submit" value="Find Gold">
+      </form>
+      <div class="activities">
+        <p>Activities:</p>
+        <div class="activities-box">
+          {% for activity in session.activities %}
+            <p class={{activity[1]}}>{{ activity[0] }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <form class="reset" action="/process_money" method="post">
+        <input type="hidden" name="place" value="reset">
+        <input type="submit" name="submit" value="Reset">
+      </form>
+    </main>
+    <div class="background"></div>
+  </body>
+</html>
