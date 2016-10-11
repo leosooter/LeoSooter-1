@@ -17,8 +17,15 @@
       <h1>Dojo-Survey</h1>
     </header>
     <main>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <p class="required-red">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
       <form class="dojo-form" action="/result" method="post">
-        <label>Your Name<input class="form-control" id="first-name"  type="text" name="name" value=""></label>
+        <label>Your Name<span class="required-red">*</span><input class="form-control required" id="first-name"  type="text" name="name" value=""></label>
         <div class="form-group">
           <label for="location">Dojo Location</label>
           <select class="form-control" name="location">
@@ -43,10 +50,12 @@
           </select>
         </div>
 
-        <label for="comments">Comments (optional)</label>
-        <textarea class="form-control" name="comments" rows="8" cols="40"></textarea>
-        <input class="form-button" type="submit" name="submit" value="Submit Form">
+        <label for="comments">Comments<span class="required-red">*</span> (max 120 characters)</label>
+        <textarea class="form-control required" name="comments" rows="8" cols="40" maxlength="120"></textarea>
+        <input class="form-button" type="submit" name="submit" value="Submit Form" disabled="disabled">
       </form>
+      <label for="over-ride">Over-ride javascript form validation (for testing server-side validation)</label>
+      <button id="over-ride" type="button" name="over-ride">Over-Ride</button>
     </main>
   </body>
 </html>
