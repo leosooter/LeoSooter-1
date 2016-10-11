@@ -22,7 +22,7 @@
         {% if valid %}
           <h4>Your form has been successfully submitted</h4>
           <p>Thank you for signing up for our indentured servitude program!</p>
-          
+
         <!-- Otherwise, display the form -->
         {% else %}
           <form action="/result" method="post">
@@ -34,17 +34,7 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
-            <!-- if form was submitted with errors, fill values back in -->
-            {% with email_value = get_flashed_messages(category_filter=["email_value"]) %}
-              {% if email_value %}
-                {% for val in email_value %}
-                  <label>Email<span class="required-red">*</span><input class="form-control required" id="email"  type="email" name="email" autofocus="true" value={{ val }}></label>
-                {% endfor %}
-              <!-- if form is being displayed for the first time, leave values empty -->
-              {% else %}
-                <label>Email<span class="required-red">*</span><input class="form-control required" id="email"  type="email" name="email" autofocus="true" value=""></label>
-              {% endif %}
-            {% endwith %}
+            <label>Email<span class="required-red">*</span><input class="form-control required" id="email"  type="email" name="email" autofocus="true" value={{ session['email_value'] }}></label>
 
             <!-- check for error messages and display -->
             {% with first_name = get_flashed_messages(category_filter=["first_name"]) %}
@@ -54,17 +44,7 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
-            <!-- if form was submitted with errors, fill values back in -->
-            {% with fname_value = get_flashed_messages(category_filter=["fname_value"]) %}
-              {% if fname_value %}
-                {% for val in fname_value %}
-                  <label>First Name<span class="required-red">*</span><input class="form-control required" id="first-name"  type="text" name="first-name" value={{ val }}></label>
-                {% endfor %}
-              <!-- if form is being displayed for the first time, leave values empty -->
-              {% else %}
-                <label>First Name<span class="required-red">*</span><input class="form-control required" id="first-name"  type="text" name="first-name" value=""></label>
-              {% endif %}
-            {% endwith %}
+            <label>First Name<span class="required-red">*</span><input class="form-control required" id="first-name"  type="text" name="first-name" value={{ session['fname_value'] }}></label>
 
             <!-- check for error messages and display -->
             {% with last_name = get_flashed_messages(category_filter=["last_name"]) %}
@@ -74,17 +54,7 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
-            <!-- if form was submitted with errors, fill values back in -->
-            {% with lname_value = get_flashed_messages(category_filter=["lname_value"]) %}
-              {% if lname_value %}
-                {% for val in lname_value %}
-                  <label>Last Name<span class="required-red">*</span><input class="form-control required" id="last-name"  type="text" name="last-name" value={{ val }}></label>
-                {% endfor %}
-              <!-- if form is being displayed for the first time, leave values empty -->
-              {% else %}
-                <label>Last Name<span class="required-red">*</span><input class="form-control required" id="last-name"  type="text" name="last-name" value=""></label>
-              {% endif %}
-            {% endwith %}
+            <label>Last Name<span class="required-red">*</span><input class="form-control required" id="last-name"  type="text" name="last-name" value={{ session['lname_value'] }}></label>
 
             <!-- check for error messages and display -->
             {% with date_of_birth = get_flashed_messages(category_filter=["date_of_birth"]) %}
@@ -94,17 +64,7 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
-            <!-- if form was submitted with errors, fill values back in -->
-            {% with dob_value = get_flashed_messages(category_filter=["dob_value"]) %}
-              {% if dob_value %}
-                {% for val in dob_value %}
-                  <label>Date of Birth<span class="required-red">*</span><input class="form-control required" id="date-of-birth"  type="date" name="date-of-birth" value={{ val }}></label>
-                {% endfor %}
-              <!-- if form is being displayed for the first time, leave values empty -->
-              {% else %}
-                <label>Date of Birth<span class="required-red">*</span><input class="form-control required" id="date-of-birth"  type="date" name="date-of-birth" value=""></label>
-              {% endif %}
-            {% endwith %}
+            <label>Date of Birth<span class="required-red">*</span><input class="form-control required" id="date-of-birth"  type="date" name="date-of-birth" value={{ session['dob_value'] }}></label>
 
             <!-- check for error messages and display -->
             {% with password = get_flashed_messages(category_filter=["password"]) %}

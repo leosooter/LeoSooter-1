@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, flash
-
-import re, datetime
+from flask import Flask, render_template, request, redirect, flash, session
 from datetime import datetime
+import re
+
 
 app = Flask(__name__)
 
@@ -11,7 +11,16 @@ email_regex = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 password_regex = re.compile(r'(?=.*[0-9])(?=.*[A-Z])')
 
 @app.route('/')
-def index_page():
+def index():
+    if 'email_value' not in session:
+        session['email_value'] = ""
+    if 'fname_value' not in session:
+        session['fname_value'] = ""
+    if 'lname_value' not in session:
+        session['lname_value'] = ""
+    if 'dob_value' not in session:
+        session['dob_value'] = ""
+
     return render_template('index.html')
 
 
@@ -19,13 +28,17 @@ def index_page():
 def create_user():
     print "Recieved Form"
     #store form values so that they can be preserved if form redirects with errors
-    flash(request.form['email'], 'email_value')
-    flash(request.form['first-name'], 'fname_value')
-    flash(request.form['last-name'], 'lname_value')
-    flash(request.form['date-of-birth'], 'dob_value')
+    session['email_value'] = request.form['email']
+    session['fname_value'] = request.form['first-name']
+    session['lname_value'] = request.form['last-name']
+    session['dob_value'] = request.form['date-of-birth']
 
     #form information is stored as condition/message pairs. If the statement evaluates to true, the input is invalid and the message is displayed.
     #first condition checks to see if input has values entered, second condition varries by input
+
+    #I got feedback from Nick Takemori on the dangers of using eval() statements.
+    #I like the structure but I will try a more traditional approch on later assignments
+
     user_form = {
         'first_name' : [
             [ eval(str( len(request.form['first-name']) == 0) ) , "Must enter a first name."],
