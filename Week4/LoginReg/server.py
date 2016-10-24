@@ -112,7 +112,7 @@ def login():
     if not password_regex.match(password):
         flash("Please enter a valid password", 'login-password')
         login_valid = False
-    #If form fields are invalid or empy- return user to form with error messages
+    #If form fields are invalid or empty- return user to form with error messages
     if login_valid == False:
         return redirect('/')
 
