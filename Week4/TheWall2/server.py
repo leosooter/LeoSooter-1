@@ -28,6 +28,9 @@ form_msg = {
     'password' : "",
     'confirm_password' : "",
 }
+#Leo, I see what you're doing here! It works and looks pretty good, but I don't know that the extra work is worth saving repeating the few lines of code, mostly because I don't see where you're clearing all that data at the end of each req/res cycle. I will agree that your way looks cleaner, though, and none of my simple tests are breaking it -- I just don't know if there might be memory issues over the long run.
+
+# All your code looks really good, very neat, very organized. I really like that you display the dates differently depending on their recency!
 
 @app.route('/')
 def index():
@@ -237,6 +240,7 @@ def comment():
 def delete():
     #I am assuming here that the 30 minute limit on deleting messages is more of
     #a UI thing- like gmail's 'undo' feature, rather than a security issue.
+	#I would agree!
     #Someone could look at the HTML and figure out how to delete a message after the time-limit.
     #If this was a security issue I would need to run a second query and compare the time the message was created
     #to the current time in this function.
